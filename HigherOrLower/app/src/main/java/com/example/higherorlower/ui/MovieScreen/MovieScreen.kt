@@ -6,10 +6,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,18 +33,32 @@ import coil.request.ImageRequest
 import com.example.higherorlower.R
 import com.example.higherorlower.model.MoviePhoto
 import com.example.higherorlower.ui.theme.HigherOrLowerTheme
+import com.example.higherorlower.ui.utils.MovieContentType
+import com.example.higherorlower.ui.utils.MovieNavigationType
 
 @Composable
 fun MovieScreen(
+    navigationType: MovieNavigationType,
+    contentType: MovieContentType,
     movieUiState: MovieUiState,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
-    when (movieUiState) {
-        is MovieUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        is MovieUiState.Success -> MoviePhotoCard(photos = movieUiState.photos, viewModel = MovieViewModel(), modifier = modifier.fillMaxSize())
-        is MovieUiState.Error -> ErrorScreen(modifier = modifier.fillMaxSize())
+    if(contentType == MovieContentType.LIST_AND_DETAIL){
+        when (movieUiState) {
+            is MovieUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+            is MovieUiState.Success -> MoviePhotoCardRow(photos = movieUiState.photos, viewModel = MovieViewModel(), modifier = modifier.fillMaxSize())
+            is MovieUiState.Error -> ErrorScreen(modifier = modifier.fillMaxSize())
+        }
     }
+    else{
+        when (movieUiState) {
+            is MovieUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+            is MovieUiState.Success -> MoviePhotoCard(photos = movieUiState.photos, viewModel = MovieViewModel(), modifier = modifier.fillMaxSize())
+            is MovieUiState.Error -> ErrorScreen(modifier = modifier.fillMaxSize())
+        }
+    }
+
 }
 
 /**
@@ -83,7 +102,10 @@ fun ResultScreen(photos: List<MoviePhoto>, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MoviePhotoCard(photos: List<MoviePhoto>, viewModel: MovieViewModel, modifier: Modifier = Modifier) {
+fun MoviePhotoCard(
+    photos: List<MoviePhoto>,
+    viewModel: MovieViewModel,
+    modifier: Modifier = Modifier) {
    Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -103,14 +125,19 @@ fun MoviePhotoCard(photos: List<MoviePhoto>, viewModel: MovieViewModel, modifier
                         viewModel.updateVariablesOnClick(photos)
                     }
                 }
-                .padding(bottom = 20.dp)
-                .padding(top = 40.dp)
+                .padding(bottom = 10.dp)
+                .padding(top = 20.dp)
                 .size(300.dp)
                 .height(300.dp)
         )
-        Text(
-            text = "Rating prvog filma je ${photo1.rating}"
-        )
+       Box(Modifier.padding(bottom = 10.dp)) {
+           Text(
+               text = "Rating prvog filma je ${photo1.rating}"
+           )
+       }
+       Text(
+           text = "Skor je ${photo1.rating}"
+       )
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
                 .data(photo2.image)
@@ -123,10 +150,74 @@ fun MoviePhotoCard(photos: List<MoviePhoto>, viewModel: MovieViewModel, modifier
                         viewModel.updateVariablesOnClick(photos)
                     }
                 }
-                .padding(top = 20.dp)
+                .padding(top = 10.dp)
                 .size(300.dp)
                 .height(300.dp)
         )
+    }
+}
+
+
+@Composable
+fun MoviePhotoCardRow(
+    photos: List<MoviePhoto>,
+    viewModel: MovieViewModel,
+    modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        val photo1 = viewModel.photo1
+        val photo2 = viewModel.photo2
+        Column (verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally){
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current)
+                        .data(photo1.image)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = photo1.description,
+                    modifier = Modifier
+                        .clickable {
+                            if (photo1.rating >= photo2.rating) {
+                                viewModel.updateVariablesOnClick(photos)
+                            }
+                        }
+                        .width(400.dp)
+                        .height(500.dp)
+                        .padding(end = 50.dp)
+                )
+                Text(
+                    text = "Rating prvog filma je ${photo1.rating}"
+                )
+        }
+        Text(
+            text = "Skor je ${photo1.rating}"
+        )
+
+            Column(verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current)
+                        .data(photo2.image)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = photo2.description,
+                    modifier = Modifier
+                        .clickable {
+                            if (photo2.rating >= photo1.rating) {
+                                viewModel.updateVariablesOnClick(photos)
+                            }
+                        }
+                        .width(400.dp)
+                        .height(500.dp)
+                        .padding(start = 50.dp)
+                )
+                Text(
+                    text = "Rating prvog filma je ??"
+                )
+            }
     }
 }
 

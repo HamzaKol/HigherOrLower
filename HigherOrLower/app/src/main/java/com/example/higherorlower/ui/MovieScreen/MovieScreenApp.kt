@@ -19,9 +19,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.higherorlower.R
 import com.example.higherorlower.ui.utils.MovieContentType
 import com.example.higherorlower.ui.utils.MovieNavigationType
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 @Composable
 fun MoviePhotosApp(
+    windowSize: WindowWidthSizeClass,
+    modifier: Modifier = Modifier,
 ) {
+    val navigationType: MovieNavigationType
+    val contentType: MovieContentType
+
+    when (windowSize) {
+        WindowWidthSizeClass.Compact -> {
+            navigationType = MovieNavigationType.BOTTOM_NAVIGATION
+            contentType = MovieContentType.LIST_ONLY
+        }
+        WindowWidthSizeClass.Medium -> {
+            navigationType = MovieNavigationType.NAVIGATION_RAIL
+            contentType = MovieContentType.LIST_ONLY
+        }
+        WindowWidthSizeClass.Expanded -> {
+            navigationType = MovieNavigationType.PERMANENT_NAVIGATION_DRAWER
+            contentType = MovieContentType.LIST_AND_DETAIL
+        }
+        else -> {
+            navigationType = MovieNavigationType.BOTTOM_NAVIGATION
+            contentType = MovieContentType.LIST_ONLY
+        }
+    }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
@@ -32,6 +56,8 @@ fun MoviePhotosApp(
         ) {
             val movieViewModel: MovieViewModel = viewModel()
             MovieScreen(
+                navigationType = navigationType,
+                contentType = contentType,
                 movieUiState = movieViewModel.movieUiState,
                 contentPadding = innerPadding
             )
