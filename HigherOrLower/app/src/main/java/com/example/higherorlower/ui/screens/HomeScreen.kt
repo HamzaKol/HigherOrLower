@@ -1,13 +1,11 @@
-package com.example.higherorlower.ui.homeScreen
+package com.example.higherorlower.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -22,7 +20,13 @@ import androidx.compose.ui.unit.sp
 import com.example.higherorlower.R
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    onPlayButtonClicked: () -> Unit,
+    onAboutButtonClicked: () -> Unit,
+    onFeedbackButtonClicked: () -> Unit
+
+) {
     Column (
         modifier = modifier.fillMaxSize().padding(36.dp),
         verticalArrangement = Arrangement.Center,
@@ -34,7 +38,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onPlayButtonClicked ,
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red, contentColor = Color.Black),
             modifier = Modifier.padding(bottom = 10.dp).fillMaxWidth()
             ) {
@@ -42,14 +46,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
 
        OutlinedButton(
-           onClick = { /*TODO*/ },
+           onClick = onAboutButtonClicked,
            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
        ) {
             Text(text = "About", fontSize = 16.sp)
        }
 
         OutlinedButton(
-            onClick = { /*TODO*/ },
+            onClick = onFeedbackButtonClicked,
             modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
             ) {
             Text(text = "Feedback", fontSize = 16.sp)
