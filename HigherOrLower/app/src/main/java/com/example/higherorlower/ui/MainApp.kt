@@ -16,6 +16,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -69,9 +72,11 @@ fun MainAppBar(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun MainApp(navController: NavHostController = rememberNavController()) {
+fun MainApp(
+    windowSize: WindowWidthSizeClass,
+    navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
 
     val currentScreen = Screen.valueOf(
@@ -120,7 +125,7 @@ fun MainApp(navController: NavHostController = rememberNavController()) {
                 FeedbackScreen()
             }
             composable(route = Screen.Movie.name) {
-                MoviePhotosApp()
+                MoviePhotosApp(windowSize = windowSize)
             }
 
         }

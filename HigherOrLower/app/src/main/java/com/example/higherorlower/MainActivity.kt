@@ -24,8 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     val windowSize = calculateWindowSizeClass(this)
-
-                    MoviePhotosApp(windowSize = windowSize.widthSizeClass)
+                    MainApp(windowSize = windowSize.widthSizeClass)
                 }
             }
         }
