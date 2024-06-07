@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 
 private const val BASE_URL = "https://imdb-top-100-movies.p.rapidapi.com/"
-private const val API_KEY = "3b3ea527c3msh18e2db22dd73bccp13625ajsna957225cf734"
+private const val API_KEY = "bbf998706cmsh0174be895346d58p164169jsn928c1a830e3a"
 private const val API_HOST = "imdb-top-100-movies.p.rapidapi.com"
 
 // Interceptor to add the API key to requests

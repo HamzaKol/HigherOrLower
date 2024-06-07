@@ -1,6 +1,7 @@
 package com.example.higherorlower.ui
 
-import androidx.compose.foundation.layout.fillMaxHeight
+
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -69,7 +70,6 @@ fun MainAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainApp(navController: NavHostController = rememberNavController()) {
-
     val backStackEntry by navController.currentBackStackEntryAsState()
 
     val currentScreen = Screen.valueOf(
