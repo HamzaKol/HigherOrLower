@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -40,21 +41,21 @@ fun HomeScreen(
         Button(
             onClick = onPlayButtonClicked ,
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red, contentColor = Color.Black),
-            modifier = Modifier.padding(bottom = 10.dp).fillMaxWidth()
+            modifier = Modifier.padding(bottom = 10.dp).fillMaxWidth(0.7f)
             ) {
             Text(text = "Play", fontSize = 16.sp)
         }
 
        OutlinedButton(
            onClick = onAboutButtonClicked,
-           modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
+           modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth(0.7f)
        ) {
             Text(text = "About", fontSize = 16.sp)
        }
 
         OutlinedButton(
             onClick = onFeedbackButtonClicked,
-            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
+            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth(0.7f)
             ) {
             Text(text = "Feedback", fontSize = 16.sp)
         }
