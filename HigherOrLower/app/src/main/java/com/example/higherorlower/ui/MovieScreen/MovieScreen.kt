@@ -113,6 +113,7 @@ fun MoviePhotoCard(
     ) {
        val photo1 = viewModel.photo1
        val photo2 = viewModel.photo2
+       val score = viewModel.score
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
                 .data(photo1.image)
@@ -136,7 +137,7 @@ fun MoviePhotoCard(
            )
        }
        Text(
-           text = "Skor je ${photo1.rating}"
+           text = "Skor je ${score}"
        )
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
@@ -170,6 +171,7 @@ fun MoviePhotoCardRow(
     ) {
         val photo1 = viewModel.photo1
         val photo2 = viewModel.photo2
+        val score = viewModel.score
         Column (verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally){
                 AsyncImage(
@@ -193,7 +195,7 @@ fun MoviePhotoCardRow(
                 )
         }
         Text(
-            text = "Skor je ${photo1.rating}"
+            text = "Skor je ${score}"
         )
 
             Column(verticalArrangement = Arrangement.Center,

@@ -56,6 +56,9 @@ class MovieViewModel(
     ))
         private set
 
+    var score by mutableStateOf(0)
+        private set
+
     init {
         getMoviePhotos()
     }
@@ -77,5 +80,6 @@ class MovieViewModel(
     fun updateVariablesOnClick(photos: List<MoviePhoto>) {
         photo1 = photo2
         photo2 = photos[photos.indices.random()]
+        score += 1
     }
 }
