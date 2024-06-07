@@ -9,8 +9,6 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.ui.Modifier
 import com.example.higherorlower.ui.MainApp
 import com.example.higherorlower.ui.theme.HigherOrLowerTheme
-import com.example.higherorlower.ui.MovieScreen.MoviePhotosApp
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 
 class MainActivity : ComponentActivity() {
