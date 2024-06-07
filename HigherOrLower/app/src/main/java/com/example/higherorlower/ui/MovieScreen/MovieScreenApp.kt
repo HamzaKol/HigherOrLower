@@ -50,7 +50,6 @@ fun MoviePhotosApp(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { MovieTopAppBar(scrollBehavior = scrollBehavior) }
     ) { innerPadding ->
         Surface(
             modifier = Modifier.fillMaxSize()
@@ -64,18 +63,4 @@ fun MoviePhotosApp(
             )
         }
     }
-}
-
-@Composable
-fun MovieTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier) {
-    CenterAlignedTopAppBar(
-        scrollBehavior = scrollBehavior,
-        title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineSmall,
-            )
-        },
-        modifier = modifier
-    )
 }

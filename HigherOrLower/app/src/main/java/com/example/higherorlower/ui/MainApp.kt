@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.higherorlower.ui.MovieScreen.MoviePhotosApp
 import com.example.higherorlower.ui.screens.HomeScreen
 import com.example.higherorlower.ui.screens.AboutScreen
 import com.example.higherorlower.ui.screens.CategoriesScreen
@@ -35,7 +36,8 @@ enum class Screen (route: String) {
     Home("home"),
     About("about"),
     Feedback("feedback"),
-    Categories("categories");
+    Categories("categories"),
+    Movie("movie");
 }
 
 
@@ -105,14 +107,20 @@ fun MainApp(navController: NavHostController = rememberNavController()) {
                 )
             }
             composable(route = Screen.About.name) {
-                val context = LocalContext.current
                 AboutScreen()
             }
             composable(route = Screen.Categories.name) {
-                CategoriesScreen()
+                CategoriesScreen(
+                    onClickMovie = {
+                        navController.navigate(Screen.Movie.name)
+                    }
+                )
             }
             composable(route = Screen.Feedback.name) {
                 FeedbackScreen()
+            }
+            composable(route = Screen.Movie.name) {
+                MoviePhotosApp()
             }
 
         }
