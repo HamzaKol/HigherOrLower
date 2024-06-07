@@ -23,6 +23,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 @Composable
 fun MoviePhotosApp(
     windowSize: WindowWidthSizeClass,
+    onEnd: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val navigationType: MovieNavigationType
@@ -59,7 +60,8 @@ fun MoviePhotosApp(
                 navigationType = navigationType,
                 contentType = contentType,
                 movieUiState = movieViewModel.movieUiState,
-                contentPadding = innerPadding
+                contentPadding = innerPadding,
+                onEnd = onEnd
             )
         }
     }

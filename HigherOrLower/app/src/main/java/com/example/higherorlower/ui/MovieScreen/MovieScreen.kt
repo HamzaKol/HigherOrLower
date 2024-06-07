@@ -41,20 +41,21 @@ fun MovieScreen(
     navigationType: MovieNavigationType,
     contentType: MovieContentType,
     movieUiState: MovieUiState,
+    onEnd: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     if(contentType == MovieContentType.LIST_AND_DETAIL){
         when (movieUiState) {
             is MovieUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-            is MovieUiState.Success -> MoviePhotoCardRow(photos = movieUiState.photos, viewModel = MovieViewModel(), modifier = modifier.fillMaxSize())
+            is MovieUiState.Success -> MoviePhotoCardRow(photos = movieUiState.photos, viewModel = MovieViewModel(), onEnd = onEnd, modifier = modifier.fillMaxSize())
             is MovieUiState.Error -> ErrorScreen(modifier = modifier.fillMaxSize())
         }
     }
     else{
         when (movieUiState) {
             is MovieUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-            is MovieUiState.Success -> MoviePhotoCard(photos = movieUiState.photos, viewModel = MovieViewModel(), modifier = modifier.fillMaxSize())
+            is MovieUiState.Success -> MoviePhotoCard(photos = movieUiState.photos, viewModel = MovieViewModel(), onEnd = onEnd, modifier = modifier.fillMaxSize())
             is MovieUiState.Error -> ErrorScreen(modifier = modifier.fillMaxSize())
         }
     }
@@ -105,6 +106,7 @@ fun ResultScreen(photos: List<MoviePhoto>, modifier: Modifier = Modifier) {
 fun MoviePhotoCard(
     photos: List<MoviePhoto>,
     viewModel: MovieViewModel,
+    onEnd: () -> Unit,
     modifier: Modifier = Modifier) {
    Column(
         modifier = modifier,
@@ -124,6 +126,9 @@ fun MoviePhotoCard(
                 .clickable {
                     if (photo1.rating >= photo2.rating) {
                         viewModel.updateVariablesOnClick(photos)
+                    }
+                    else {
+                        onEnd()
                     }
                 }
                 .padding(bottom = 10.dp)
@@ -150,6 +155,9 @@ fun MoviePhotoCard(
                     if (photo2.rating >= photo1.rating) {
                         viewModel.updateVariablesOnClick(photos)
                     }
+                    else {
+                        onEnd()
+                    }
                 }
                 .padding(top = 10.dp)
                 .size(300.dp)
@@ -163,6 +171,7 @@ fun MoviePhotoCard(
 fun MoviePhotoCardRow(
     photos: List<MoviePhoto>,
     viewModel: MovieViewModel,
+    onEnd: () -> Unit,
     modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
@@ -184,6 +193,8 @@ fun MoviePhotoCardRow(
                         .clickable {
                             if (photo1.rating >= photo2.rating) {
                                 viewModel.updateVariablesOnClick(photos)
+                            } else {
+                                onEnd()
                             }
                         }
                         .width(400.dp)
@@ -210,6 +221,8 @@ fun MoviePhotoCardRow(
                         .clickable {
                             if (photo2.rating >= photo1.rating) {
                                 viewModel.updateVariablesOnClick(photos)
+                            } else {
+                                onEnd()
                             }
                         }
                         .width(400.dp)

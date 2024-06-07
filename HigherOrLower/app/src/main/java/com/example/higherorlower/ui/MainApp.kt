@@ -33,6 +33,7 @@ import com.example.higherorlower.ui.MovieScreen.MoviePhotosApp
 import com.example.higherorlower.ui.screens.HomeScreen
 import com.example.higherorlower.ui.screens.AboutScreen
 import com.example.higherorlower.ui.screens.CategoriesScreen
+import com.example.higherorlower.ui.screens.EndScreen
 import com.example.higherorlower.ui.screens.FeedbackScreen
 
 enum class Screen (route: String) {
@@ -40,7 +41,8 @@ enum class Screen (route: String) {
     About("about"),
     Feedback("feedback"),
     Categories("categories"),
-    Movie("movie");
+    Movie("movie"),
+    EndScreen("endscreen");
 }
 
 
@@ -125,7 +127,10 @@ fun MainApp(
                 FeedbackScreen()
             }
             composable(route = Screen.Movie.name) {
-                MoviePhotosApp(windowSize = windowSize)
+                MoviePhotosApp(windowSize = windowSize, onEnd = { navController.navigate(Screen.EndScreen.name) })
+            }
+            composable(route = Screen.EndScreen.name) {
+                EndScreen( onPlayAgain = { navController.navigate(Screen.Movie.name) }, onExit = { navController.navigate(Screen.Home.name) } )
             }
 
         }

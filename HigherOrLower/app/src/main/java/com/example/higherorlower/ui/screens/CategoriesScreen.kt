@@ -49,9 +49,6 @@ fun CategoryCard(title: String, image: Int, onClickEvent: () -> Unit) {
 @Composable
 fun CategoriesScreen (onClickMovie: () -> Unit) {
     Column {
-        CategoryCard(title = "Imdb: rating", image = R.drawable.imdb, onClickMovie)
-        CategoryCard(title = "Spotify: most popular artists", image = R.drawable.spotify, onClickMovie)
-
-
+        CategoryCard(title = "IMDb: Movie Ratings", image = R.drawable.imdb, onClickMovie)
     }
 }
