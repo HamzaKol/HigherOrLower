@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.higherorlower.ui.MovieScreen.MoviePhotosApp
+import com.example.higherorlower.ui.MainApp
 import com.example.higherorlower.ui.theme.HigherOrLowerTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    MoviePhotosApp()
+                    MainApp()
                 }
             }
         }
